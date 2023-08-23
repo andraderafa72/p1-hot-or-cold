@@ -18,6 +18,18 @@ void print_game_rules(int max_number)
               << "----------------------------------------------------\n\n";
 }
 
+void print_end_game(){
+    std::cout << "\nThanks for playing.\n";
+}
+
+void print_win_game(int rounds){
+    std::cout << ">>> Yeah, correct guess!\n"
+    << "\nIt took you " << rounds << " rounds to guess the correct number!\n"
+    << "===================================================\n";
+
+    print_end_game();
+}
+
 int mod(int n)
 {
     return n >= 0 ? n : -n;
@@ -52,6 +64,12 @@ public:
 
         if(value < 0){
             game_finished = true;
+            print_end_game();
+            return;
+        }
+
+        if(value > limit){
+            std::cout << ">>> Value above the limit! Type a value between 1 and " << limit << ".\n";
             return;
         }
 
@@ -59,7 +77,7 @@ public:
         if (is_target)
         {
             game_finished = true;
-            std::cout << ">>> Yeah, correct guess!\n";
+            print_win_game(round);
             return;
         }
 
@@ -76,7 +94,7 @@ public:
         std::string status = distance_from_target > prev_distance
                                  ? "it’s getting cold"
                                  : "it’s hot though";
-
+                                 
         round++;
         prev_value = value;
 

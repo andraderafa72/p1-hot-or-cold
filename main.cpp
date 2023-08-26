@@ -5,7 +5,7 @@
 void usage()
 {
   std::cout << "Usage: hot_cold [<max_guess_value>] [-h] [--help]\n"
-            << "\t <max_guess_value> => Max guess number. The game will generate a target between 1 and this parameter value. Default = 30"
+            << "\t <max_guess_value> => Max guess number. The game will generate a target between 1 and this parameter value. Default = 30\n"
             << "\t -h, --help => Print usage";
 }
 
@@ -51,6 +51,12 @@ void print_param_error()
 
 GameSettings proccess_arguments(int argc, char *argv[])
 {
+  if (argc > 2) {
+    std::cout << ">>> Wrong number of arguments.\n";
+    usage();
+    exit(1);
+  }
+
   GameSettings game_settings;
 
   for (size_t i = 0; i < argc; i++)
